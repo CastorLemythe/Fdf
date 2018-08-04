@@ -19,8 +19,8 @@ int		ft_atoi(const char *tab)
 	nb = 0;
 	i = 0;
 	n = 0;
-	while (tab[i] == '\n' || tab[i] == '\t' || tab[i] == '\v' ||
-	tab[i] == '\f' || tab[i] == '\r' || tab[i] == ' ')
+	while (tab[i] == '\n' || tab[i] == '\t' || tab[i] == '\v'
+		|| tab[i] == '\f' || tab[i] == '\r' || tab[i] == ' ')
 		i++;
 	if (tab[i] == '-')
 		n++;
