@@ -18,7 +18,7 @@ void	color_up(int alt, int alt_to, double evo, t_case *stock)
 		{
 			evo = (alt_to - alt) * evo / -alt * stock->min;
 			stock->color = 0xffffff - 0x010100 * (-alt * stock->min
-			- (int)evo);
+								- (int)evo);
 		}
 		else
 		{
@@ -45,8 +45,7 @@ void	color_down(int alt, int alt_to, double evo, t_case *stock)
 		if (alt - evo * (alt - alt_to) > 0)
 		{
 			evo = (alt - alt_to) * evo * stock->max;
-			stock->color = 0xffffff - 0x000101 * (alt * stock->max
-			- (int)evo);
+			stock->color = 0xffffff - 0x000101 * (alt * stock->max - (int)evo);
 		}
 		else
 		{

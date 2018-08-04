@@ -70,7 +70,7 @@ void	ft_mlx_loop(t_case *stock)
 	stock->move_y = 0;
 	mlx_key_hook(stock->win, my_key_funct, stock);
 	mlx_loop(stock->mlx);
-	free(stock->map);
+	free(stock->map); // free x
 	free(stock->str_ima);
 }
 
@@ -95,7 +95,7 @@ int		main(int argc, char **argv)
 	while (++i < stock->height)
 		stock->map[i] = (int*)malloc(sizeof(stock->map) * (stock->width));
 	stock->map = ft_tab_atoi(dest, stock->map);
-	ft_strdel(dest);
+	ft_strdel(dest); // free x
 	ft_mlx_loop(stock);
 	return (0);
 }

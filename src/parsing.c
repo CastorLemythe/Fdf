@@ -112,6 +112,7 @@ char	**ft_get_tab(char **dest, char *file, int fd, t_case *stock)
 	y = 0;
 	while (get_next_line(fd, &line))
 		dest[y++] = line;
+	close(fd);
 	return (dest);
 }
 

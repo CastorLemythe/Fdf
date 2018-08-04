@@ -15,21 +15,21 @@
 void	ft_print_commands(t_case *stock)
 {
 	mlx_string_put(stock->mlx, stock->win, 0, 0, 0x00ff00,
-	"S : switch project.\n");
+		"S : switch project.\n");
 	mlx_string_put(stock->mlx, stock->win, 0, 14, 0x00ff00,
-	"< : moove left.\n");
+		"< : moove left.\n");
 	mlx_string_put(stock->mlx, stock->win, 0, 28, 0x00ff00,
-	"> : moove right.\n");
+		"> : moove right.\n");
 	mlx_string_put(stock->mlx, stock->win, 0, 42, 0x00ff00,
-	"^ : moove up.\n");
+		"^ : moove up.\n");
 	mlx_string_put(stock->mlx, stock->win, 0, 56, 0x00ff00,
-	"v : moove down.\n");
+		"v : moove down.\n");
 	mlx_string_put(stock->mlx, stock->win, 0, 70, 0x00ff00,
-	"+ : zoom.\n");
+		"+ : zoom.\n");
 	mlx_string_put(stock->mlx, stock->win, 0, 84, 0x00ff00,
-	"- : dezoom.\n");
+		"- : dezoom.\n");
 	mlx_string_put(stock->mlx, stock->win, 0, 112, 0x00ff00,
-	"Space : start/reset.\n");
+		"Space : start/reset.\n");
 	mlx_string_put(stock->mlx, stock->win, 0, 127, 0x00ff00,
-	"Esc : quit.\n");
+		"Esc : quit.\n");
 }
