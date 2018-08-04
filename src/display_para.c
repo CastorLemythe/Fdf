@@ -12,78 +12,78 @@
 
 #include "../includes/fdf.h"
 
-void	z_para_iso(t_case *stock)
+void	z_para_iso(t_case *stk)
 {
-	stock->h = 15;
-	stock->w = 30;
-	z_para_max(stock);
-	stock->h = 25;
-	stock->w = 50;
+	stk->h = 15;
+	stk->w = 30;
+	z_para_max(stk);
+	stk->h = 25;
+	stk->w = 50;
 }
 
-void	other_point_para_2(t_case *stock, int y, int x)
+void	other_point_para_2(t_case *stk, int y, int x)
 {
-    if (x + 1 < stock->width)
+    if (x + 1 < stk->width)
     {
-        stock->x1 = stock->x1 + stock->w;
-        stock->y1 = stock->y + stock->h + stock->h * x +
-	stock->h * y - stock->w * stock->map[y][x + 1];
+        stk->x1 = stk->x1 + stk->w;
+        stk->y1 = stk->y + stk->h + stk->h * x +
+			stk->h * y - stk->w * stk->map[y][x + 1];
     }
-	else if (y + 1 < stock->height)
+	else if (y + 1 < stk->height)
     {
-        stock->x1 = stock->x - stock->w * (y + 1);
-        stock->y1 = stock->y + stock->h * (y + 1) -
-	stock->w * stock->map[y + 1][0];
+        stk->x1 = stk->x - stk->w * (y + 1);
+        stk->y1 = stk->y + stk->h * (y + 1) -
+			stk->w * stk->map[y + 1][0];
     }
 }
 
-void    other_point_para(t_case *stock, int y, int x)
+void    other_point_para(t_case *stk, int y, int x)
 {
-    if (x + 1 < stock->width)
+    if (x + 1 < stk->width)
     {
-        stock->x2 = stock->x1 + stock->w;
-        stock->y2 = stock->y + stock->h + stock->h * x + stock->h * y
-	- stock->w * stock->map[y][x + 1];
-        draw_hub(stock, stock->map[y][x], stock->map[y][x + 1]);
-	if (stock->x1 > stock->x2)
+        stk->x2 = stk->x1 + stk->w;
+        stk->y2 = stk->y + stk->h + stk->h * x + stk->h * y
+			- stk->w * stk->map[y][x + 1];
+        draw_hub(stk, stk->map[y][x], stk->map[y][x + 1]);
+	if (stk->x1 > stk->x2)
 	{
-		stock->x1 = stock->x2;
-		stock->y1 = stock->y2;
+		stk->x1 = stk->x2;
+		stk->y1 = stk->y2;
 	}
     }
-    if (y + 1 < stock->height)
+    if (y + 1 < stk->height)
     {
-        stock->x2 = stock->x1 - stock->w;
-        stock->y2 = stock->y + stock->h + stock->h * x + stock->h * y
-	- stock->w * stock->map[y + 1][x];
-        draw_hub(stock, stock->map[y][x], stock->map[y + 1][x]);
-	if (stock->x1 < stock->x2)
-		stock->x1 = stock->x2;
+        stk->x2 = stk->x1 - stk->w;
+        stk->y2 = stk->y + stk->h + stk->h * x + stk->h * y
+			- stk->w * stk->map[y + 1][x];
+        draw_hub(stk, stk->map[y][x], stk->map[y + 1][x]);
+	if (stk->x1 < stk->x2)
+		stk->x1 = stk->x2;
     }
-    other_point_para_2(stock, y, x);
+    other_point_para_2(stk, y, x);
 }
 
-void    first_point_para(t_case *stock)
+void    first_point_para(t_case *stk)
 {
-    stock->x = stock->w + stock->w * (stock->height - 1) + stock->move_x;
-    stock->y = stock->w + stock->z_para + stock->move_y;
-	stock->x1 = stock->x;
-	stock->y1 = stock->y - stock->map[0][0] * stock->w;
+    stk->x = stk->w + stk->w * (stk->height - 1) + stk->move_x;
+    stk->y = stk->w + stk->z_para + stk->move_y;
+	stk->x1 = stk->x;
+	stk->y1 = stk->y - stk->map[0][0] * stk->w;
 }
 
-void	ft_display_para(t_case *stock, int x, int y)
+void	ft_display_para(t_case *stk, int x, int y)
 {
-	first_point_para(stock);
+	first_point_para(stk);
 
-	while (y < stock->height)
+	while (y < stk->height)
 	{
-		while (x < stock->width)
+		while (x < stk->width)
 		{
-			other_point_para(stock, y, x);
+			other_point_para(stk, y, x);
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-	mlx_put_image_to_window(stock, stock->win, stock->ptr_ima, 0, 0);
+	mlx_put_image_to_window(stk, stk->win, stk->ptr_ima, 0, 0);
 }

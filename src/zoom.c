@@ -1,51 +1,51 @@
 #include "../includes/fdf.h"
 
-void	zoom_1(t_case *stock)
+void	zoom_1(t_case *stk)
 {
-	stock->h = 15;
-	stock->w = 30;
+	stk->h = 15;
+	stk->w = 30;
 }
 
-void	zoom_2(t_case *stock)
+void	zoom_2(t_case *stk)
 {
-	stock->h = 25;
-	stock->w = 50;
+	stk->h = 25;
+	stk->w = 50;
 }
 
-void	zoom_3(t_case *stock)
+void	zoom_3(t_case *stk)
 {
-	stock->h = 35;
-	stock->w = 70;
+	stk->h = 35;
+	stk->w = 70;
 }
 
-void	zoom_4(t_case *stock)
+void	zoom_4(t_case *stk)
 {
-	stock->h = 45;
-	stock->w = 90;
+	stk->h = 45;
+	stk->w = 90;
 }
 
-void	zoom(int key, t_case *stock)
+void	zoom(int key, t_case *stk)
 {
 	if (key == 45) // 69 == + 78 == -
 	{
-		if (stock->h == 25)
-			zoom_3(stock);
-		else if (stock->h == 35)
-			zoom_4(stock);
-		else if (stock->h == 15)
-			zoom_2(stock);
+		if (stk->h == 25)
+			zoom_3(stk);
+		else if (stk->h == 35)
+			zoom_4(stk);
+		else if (stk->h == 15)
+			zoom_2(stk);
 	}
 	else if (key == 46)
 	{
-		if (stock->h == 25)
-			zoom_1(stock);
-		else if (stock->h == 35)
-			zoom_2(stock);
-		else if (stock->h == 45)
-			zoom_3(stock);
+		if (stk->h == 25)
+			zoom_1(stk);
+		else if (stk->h == 35)
+			zoom_2(stk);
+		else if (stk->h == 45)
+			zoom_3(stk);
 	}
-	else if ((key == 1 || key == 49) && stock->projection == 0)
-		zoom_1(stock);
+	else if ((key == 1 || key == 49) && stk->projection == 0)
+		zoom_1(stk);
 	else
-		zoom_2(stock);
+		zoom_2(stk);
 }

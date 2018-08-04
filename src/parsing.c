@@ -26,7 +26,7 @@ int		ft_check_iso(int **map, int height, int width)
 		while (x < width)
 		{
 			if (map[y][x] != map[y][x + 1] || map[y][x] !=
-			map[y + 1][x] || map[y][x] != map[y + 1][x + 1])
+				map[y + 1][x] || map[y][x] != map[y + 1][x + 1])
 				return (1);
 			x += 2;
 		}
@@ -35,7 +35,7 @@ int		ft_check_iso(int **map, int height, int width)
 	return (0);
 }
 
-int		ft_count(char **dest, t_case *stock)
+int		ft_count(char **dest, t_case *stk)
 {
 	int		x;
 	int		y;
@@ -57,8 +57,8 @@ int		ft_count(char **dest, t_case *stock)
 				x++;
 		}
 		if (y == 0)
-			stock->width = count;
-		if (count != stock->width)
+			stk->width = count;
+		if (count != stk->width)
 			return (1);
 	}
 	return (0);
@@ -87,7 +87,7 @@ int		ft_check_char(char *dest)
 	return (0);
 }
 
-char	**ft_get_tab(char **dest, char *file, int fd, t_case *stock)
+char	**ft_get_tab(char **dest, char *file, int fd, t_case *stk)
 {
 	char	*line;
 	int		y;
@@ -103,7 +103,7 @@ char	**ft_get_tab(char **dest, char *file, int fd, t_case *stock)
 		free(line);
 		y++;
 	}
-	stock->height = y;
+	stk->height = y;
 	if (!(dest = (char**)malloc(sizeof(*dest) * (y + 1))))
 		return (NULL);
 	close(fd);
@@ -116,19 +116,19 @@ char	**ft_get_tab(char **dest, char *file, int fd, t_case *stock)
 	return (dest);
 }
 
-char	**ft_parsing(char **dest, char *file, t_case *stock)
+char	**ft_parsing(char **dest, char *file, t_case *stk)
 {
 	int fd;
 
 	if ((fd = open(file, O_RDONLY)) == -1)
 		return (NULL);
-	if (!(dest = ft_get_tab(dest, file, fd, stock)))
+	if (!(dest = ft_get_tab(dest, file, fd, stk)))
 		return (NULL);
-	if (stock->height == 0)
+	if (stk->height == 0)
 		return (NULL);
-	if (ft_count(dest, stock))
+	if (ft_count(dest, stk))
 		return (NULL);
-	if (stock->width == 0)
+	if (stk->width == 0)
 		return (NULL);
 	return (dest);
 }

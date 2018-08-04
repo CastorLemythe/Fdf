@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-int	z_iso_max(t_case *stock)
+int	z_iso_max(t_case *stk)
 {
 	int x;
 	int y;
@@ -21,14 +21,14 @@ int	z_iso_max(t_case *stock)
 
 	y = 0;
 	tmp1 = 0;
-	while (y < stock->height)
+	while (y < stk->height)
 	{
 		x = 0;
-		while (x < stock->width)
+		while (x < stk->width)
 		{
 			tmp2 = 50 + 25 * (x / 2) + 25 * (y / 2);
-			if (tmp2 - stock->map[y][x] * 50 < 50)
-				tmp2 = 50 - (tmp2 - stock->map[y][x] * 50);
+			if (tmp2 - stk->map[y][x] * 50 < 50)
+				tmp2 = 50 - (tmp2 - stk->map[y][x] * 50);
 			else
 				tmp2 = 0;
 			if (tmp1 < tmp2)
@@ -37,11 +37,11 @@ int	z_iso_max(t_case *stock)
 		}
 		y += 2;
 	}
-	stock->z_iso = tmp1;
+	stk->z_iso = tmp1;
 	return (tmp1);
 }
 
-int	z_iso(t_case *stock)
+int	z_iso(t_case *stk)
 {
 	int x;
 	int y;
@@ -49,26 +49,26 @@ int	z_iso(t_case *stock)
 	int tmp2;
 	int point;
 
-	y = stock->height;
+	y = stk->height;
 	tmp1 = 0;
-	point = 50 + 25 * (stock->height / 2) + 25 * (stock->width / 2);
+	point = 50 + 25 * (stk->height / 2) + 25 * (stk->width / 2);
 	while (y > 0)
 	{
-		x = stock->width;
+		x = stk->width;
 		while (x > 0)
 		{
 			tmp2 = 50 + 25 * (y / 2)  + 25 * (x / 2) - 50 *
-			stock->map[y - 1][x - 1];
+				stk->map[y - 1][x - 1];
 			if (tmp1 < tmp2 - point)
 				tmp1 = tmp2 - point;
 			x -= 2;
 		}
 		y -= 2;
 	}
-	return (tmp1 + z_iso_max(stock));
+	return (tmp1 + z_iso_max(stk));
 }
 
-int     z_para_max(t_case *stock)
+int     z_para_max(t_case *stk)
 {
 	int x;
 	int y;
@@ -77,14 +77,14 @@ int     z_para_max(t_case *stock)
 
 	y = -1;
 	tmp1 = 0;
-	while (++y < stock->height)
+	while (++y < stk->height)
 	{
 		x = 0;
-		while (x < stock->width)
+		while (x < stk->width)
 		{
 			tmp2 = 30 + 15 * y + 15 * x;
-			if (tmp2 - stock->map[y][x] * 30 < 30)
-				tmp2 = 30 - (tmp2 - stock->map[y][x] * 30);
+			if (tmp2 - stk->map[y][x] * 30 < 30)
+				tmp2 = 30 - (tmp2 - stk->map[y][x] * 30);
 			else
 				tmp2 = 0;
 			if (tmp1 < tmp2)
@@ -92,11 +92,11 @@ int     z_para_max(t_case *stock)
 			x++;
 		}
 	}
-	stock->z_para = tmp1;
+	stk->z_para = tmp1;
 	return (tmp1);
 }
 
-int	z_para(t_case *stock)
+int	z_para(t_case *stk)
 {
 	int x;
 	int y;
@@ -104,49 +104,49 @@ int	z_para(t_case *stock)
 	int tmp2;
 	int point;
 
-	y = stock->height;
+	y = stk->height;
 	tmp1 = 0;
-	point = 30 + 15 * stock->height + 15 * stock->width;
+	point = 30 + 15 * stk->height + 15 * stk->width;
 	while (y > 0)
 	{
-		x = stock->width;
+		x = stk->width;
 		while (x > 0)
 		{
 			tmp2 = 30 + 15 * y + 15 * x - 30 *
-			stock->map[y - 1][x - 1];
+				stk->map[y - 1][x - 1];
 			if (tmp1 < tmp2 - point)
 				tmp1 = tmp2 - point;
 			x--;
 		}
 		y--;
 	}
-	return (tmp1 + z_para_max(stock));
+	return (tmp1 + z_para_max(stk));
 }
 
-void	ft_create_window(t_case *stock)
+void	ft_create_window(t_case *stk)
 {
 	int		x;
 	int		y;
 	int		z;
 
-	if (stock->iso == 1)
+	if (stk->iso == 1)
 	{
-		x = stock->width / 2 * 50 + 100 + 50 * (stock->height / 2);
-		y = stock->height / 2 * 25 + 100 + ((stock->width / 2) * 25);
-		z = z_iso(stock);
-		z_para_iso(stock);
+		x = stk->width / 2 * 50 + 100 + 50 * (stk->height / 2);
+		y = stk->height / 2 * 25 + 100 + ((stk->width / 2) * 25);
+		z = z_iso(stk);
+		z_para_iso(stk);
 	}
 	else
 	{
-		x = 60 + (stock->width - 1) * 30 + 30 * (stock->height - 1);
-		y = 60 + (stock->height - 1) * 15 + 15 * (stock->width - 1);
-		z = z_para(stock);
+		x = 60 + (stk->width - 1) * 30 + 30 * (stk->height - 1);
+		y = 60 + (stk->height - 1) * 15 + 15 * (stk->width - 1);
+		z = z_para(stk);
 	}
-	if (((stock->mlx = mlx_init()) == NULL) || ((stock->win =
-	mlx_new_window(stock->mlx, x, y + z, "Fdf")) == NULL))
+	if (((stk->mlx = mlx_init()) == NULL) || ((stk->win =
+	mlx_new_window(stk->mlx, x, y + z, "Fdf")) == NULL))
 	{
 		ft_putstr("Error : create new window.\n");
 		exit(0);
 	}
-	image(stock, x, y + z);
+	image(stk, x, y + z);
 }
